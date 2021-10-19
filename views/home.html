@@ -1,0 +1,152 @@
+<!--
+ Copyright 2019 Google Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MCIF Elton Pastilha</title>
+    <meta name="description" content="MCIF Elton Pastilha - Autenticacion with Fido2 was created using some parts from the google codelab.">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/bundle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/herrjemand/Base64URL-ArrayBuffer@latest/lib/base64url-arraybuffer.js"></script>
+    <script src="/components-bundle.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  </head>
+  <body class="mdc-typography">
+    <mwc-top-app-bar-fixed>
+      <span slot="title">MCIF Elton Pastilha - Autenticacion with Fido2</span>
+    </mwc-top-app-bar-fixed>
+
+    <main class="content">
+      <h2>
+        Welcome, {{username}}!
+      </h2>
+      <div id="progress-circle" class="mdc-circular-progress--indeterminate hidden" style="width: 48px !important;height: 48px !important;margin: auto;" role="progressbar" aria-label="Example Progress Bar" aria-valuemin="0" aria-valuemax="1">
+        <div class="mdc-circular-progress__determinate-container">
+          <svg class="mdc-circular-progress__determinate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle class="mdc-circular-progress__determinate-track" cx="24" cy="24" r="18" stroke-width="4"/>
+            <circle class="mdc-circular-progress__determinate-circle" cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="113.097" stroke-width="4"/>
+          </svg>
+        </div>
+        <div class="mdc-circular-progress__indeterminate-container" style="width: 48px !important;height: 48px !important;">
+          <div class="mdc-circular-progress__spinner-layer">
+            <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
+              <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="4"/>
+              </svg>
+            </div>
+            <div class="mdc-circular-progress__gap-patch">
+              <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="3.2"/>
+              </svg>
+            </div>
+            <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
+              <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input id="registerPlatform" type="submit" class="mdc-button mdc-button--raised hidden" value="Register Credencial from Platform (Ex. Microsoft Hello)" />
+      <p></p>
+      <input id="registerCrossPlatform" type="submit" class="mdc-button mdc-button--raised hidden" value="Register Credencial from Cross-Platform (Ex. NFC, USB, BTW)" />
+      <h3 class="mdc-typography mdc-typography--headline6">
+        Your registered credentials:
+      </h3>
+      <section>
+        <div id="list"></div>
+      </section>
+      <mwc-button><a href="/api/auth/signout">Sign out</a></mwc-button>
+    </main>
+    <script type="module">
+      import { getCredentials, removeCredential, registerCredential, unregisterCredential } from '/client.js';
+
+      
+      var progressCircle = document.getElementById("progress-circle");
+      const registerPlatform = document.querySelector('#registerPlatform');
+      const registerCrossPlatform = document.querySelector('#registerCrossPlatform');
+      // Check if browser accept FIDO2
+      if (window.PublicKeyCredential) {
+        PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
+        .then(uvpaa => {
+          if (uvpaa) {
+            registerPlatform.classList.remove('hidden');
+            registerCrossPlatform.classList.remove('hidden');
+          } else {
+            document
+              .querySelector('#uvpa_unavailable')
+              .classList.remove('hidden');
+          }
+        });        
+      } else {
+        document
+          .querySelector('#uvpa_unavailable')
+          .classList.remove('hidden');
+      }
+      // Receive the credentials from API
+      getCredentials();
+        //On submit add some adicional data, in case of cred type Platform.
+      registerPlatform.addEventListener('click', e => {
+        progressCircle.classList.remove("hidden");
+          // Start the process of FIDO2 and Server API in client.js
+        registerCredential({
+          attestation: 'none',
+          authenticatorSelection: {
+            authenticatorAttachment: 'platform',
+            userVerification: 'discouraged',
+            requireResidentKey: false
+          }
+        })
+        .then(user => {
+          getCredentials();
+        })
+        .catch(e => alert(e))
+        .finally(function() {
+          progressCircle.classList.add("hidden");
+        });
+      });
+        
+        //On submit add some adicional data, in case of cred type Cross-Platform.
+      registerCrossPlatform.addEventListener('click', e => {
+        progressCircle.classList.remove("hidden");
+          // Start the process of FIDO2 and Server API in client.js
+        registerCredential({
+          attestation: 'none',
+          authenticatorSelection: {
+            authenticatorAttachment: 'cross-platform',
+            userVerification: 'discouraged',
+            requireResidentKey: false
+          }
+        })
+        .then(user => {
+          getCredentials();
+        })
+        .catch(e => alert(e))
+        .finally(function() {
+          progressCircle.classList.add("hidden");
+        });
+      });
+        
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!--
+ Copyright 2019 Google Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MCIF Elton Pastilha</title>
+    <meta name="description" content="MCIF Elton Pastilha - Autenticacion with Fido2 was created using some parts from the google codelab.">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/herrjemand/Base64URL-ArrayBuffer@latest/lib/base64url-arraybuffer.js"></script>
+    <script src="/components-bundle.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  </head>
+  <body class="mdc-typography">
+    <mwc-top-app-bar-fixed>
+      <span slot="title">MCIF Elton Pastilha - Autenticacion with Fido2</span>
+    </mwc-top-app-bar-fixed>
+    <main class="center-content">
+      <div>
+        <h1>
+          Hello, do you want to login or register a new user?
+        </h1>
+        <a class="mdc-button mdc-button--raised" style="will-change: unset;" href="/login"> Login </a>
+        <a class="mdc-button mdc-button--raised" style="will-change: unset;" href="/register"> Register </a>
+        <p class="instructions">
+          This experience was created using some parts from the google <a href="https://codelabs.developers.google.com/codelabs/webauthn-reauth/">codelab</a>.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

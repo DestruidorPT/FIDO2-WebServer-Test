@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MCIF Elton Pastilha</title>
+    <meta name="description" content="MCIF Elton Pastilha - Autenticacion with Fido2 was created using some parts from the google codelab.">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/bundle.css">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/herrjemand/Base64URL-ArrayBuffer@latest/lib/base64url-arraybuffer.js"></script>
+    <script src="/components-bundle.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  </head>
+  <body class="mdc-typography">
+    <mwc-top-app-bar-fixed>
+      <span slot="title">MCIF Elton Pastilha - Autenticacion with Fido2</span>
+    </mwc-top-app-bar-fixed>
+    <main class="content-fido">
+      <div class="content-form">
+        <h2 style="text-align: center">
+          Register a new user
+        </h2>
+        <form id="formRegister" method="POST">
+          <label class="mdc-text-field mdc-text-field--outlined">
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="username-label">username</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <input type="text" class="mdc-text-field__input" aria-labelledby="username-label" name="username">
+          </label>
+          <div id="progress-circle" class="mdc-circular-progress--indeterminate hidden" style="width: 48px !important;height: 48px !important;margin: auto;" role="progressbar" aria-label="Example Progress Bar" aria-valuemin="0" aria-valuemax="1">
+            <div class="mdc-circular-progress__determinate-container">
+              <svg class="mdc-circular-progress__determinate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle class="mdc-circular-progress__determinate-track" cx="24" cy="24" r="18" stroke-width="4"/>
+                <circle class="mdc-circular-progress__determinate-circle" cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="113.097" stroke-width="4"/>
+              </svg>
+            </div>
+            <div class="mdc-circular-progress__indeterminate-container" style="width: 48px !important;height: 48px !important;">
+              <div class="mdc-circular-progress__spinner-layer">
+                <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
+                  <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="4"/>
+                  </svg>
+                </div>
+                <div class="mdc-circular-progress__gap-patch">
+                  <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="3.2"/>
+                  </svg>
+                </div>
+                <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
+                  <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <input type="radio" id="platform" name="authenticatorAttachment" value="platform" checked>
+            <label for="male"><b>Platform</b> - Authenticate using certificates on the local device (Ex. Microsoft Hello)</label><br>
+            <input type="radio" id="cross-platform" name="authenticatorAttachment" value="cross-platform">
+            <label for="female"><b>Cross-platform</b> - Authenticate using certificates on external devices (Ex. NFC, Bluetooth, USB)</label><br>
+          </div>
+          <input type="submit" class="mdc-button mdc-button--raised" value="Register" />
+          <a class="mdc-button mdc-button--raised" href="/">Go back</a>
+        </form>
+      </div>
+      <div class="content-exchanged">
+        <h2 style="text-align: center">
+          Informacion exchanged between browser and the server
+        </h2>
+        <div class="information-enchanged">
+          <div class="information-enchanged-header"><h4>Client (Browser)</h4><h4>Server</h4></div>
+          <div id="messages-enchanged" class="information">
+            
+          </div>
+        </div>
+      </div>
+      <script type="module">
+        new mdc.textField.MDCTextField(document.querySelector('.mdc-text-field'));
+        var progressCircle = document.getElementById("progress-circle");
+        import { registerNewUser, logDiv } from '/client.js';
+        const form = document.querySelector('#formRegister');
+        const divMessagesEnchanged = document.getElementById('messages-enchanged');
+        //On submit add some adicional data
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          progressCircle.classList.remove("hidden");
+          const form = new FormData(e.target);
+          const cred = {
+            attestation: 'none',
+            authenticatorSelection: {
+              userVerification: 'discouraged',
+              requireResidentKey: false
+            }
+          };
+          form.forEach((v, k) => {
+            if(k == "authenticatorAttachment") {
+              cred["authenticatorSelection"][k] = v;
+            } else {
+              cred[k] = v
+            }
+          });
+          // Add log on screen
+          divMessagesEnchanged.appendChild(logDiv(JSON.stringify(cred, undefined, 2), "POST"));
+          // Start the process of FIDO2 and Server API in client.js
+          registerNewUser(cred, divMessagesEnchanged).then(user => {
+          // Add log on screen
+            divMessagesEnchanged.appendChild(logDiv(JSON.stringify(user, undefined, 2)));
+            if (confirm("User was registed, do you want to go to login page?") == true) {
+              location.href = '/login';
+            }
+          }).catch(e => {
+            alert(e);
+          }).finally(function() {
+            progressCircle.classList.add("hidden");
+          });
+        });
+      </script>
+    </main>
+  </body>
+</html>

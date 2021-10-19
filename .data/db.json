@@ -1,0 +1,104 @@
+{
+  "users": [
+    {
+      "username": "test",
+      "id": "rk--clAE_o-ynlsEddnZ9IXMlQ6yFjRO0jNFL3tXask",
+      "credentials": [
+        {
+          "publicKey": "pQECAyYgASFYIMm7etAvDglfG8V3E2krsUcWOGVyFvELN4JZeyhLZRjcIlggI5JNZ_PJXnJFA5SfsNaQxYbE2JwK77XjRPMyrwwhD9s",
+          "transports": [
+            "usb",
+            "ble",
+            "nfc"
+          ],
+          "credId": "ClqpLsJBoMlfPI0XcvxCuKZEJCTBFhsuDEyu1sROngzYfKCYjJKeq7Jvs-EzpAmaJu9-bXFG1CbmhBBrlnqCTw",
+          "prevCounter": 9
+        },
+        {
+          "publicKey": "pQECAyYgASFYIHEfewEqml68FbQZwHB-xEnQW6MMV_NGAKlzoukSA1GiIlggCS3kadCwZ5W2Bre2Kx5v-rTOdxHntc8FjuUD32pWe1Q",
+          "transports": [
+            "internal"
+          ],
+          "credId": "AaKxvaYPhh0j54B3JLL-JJ-2wa6sf9b4EZAG2tHVE6R7oaP-J78DAKTQVjyZKogNKAGAUgA8ZqUuH0lqxr1fXTE",
+          "prevCounter": 1
+        }
+      ]
+    },
+    {
+      "username": "testt",
+      "id": "k2LU1kiX5QsITRpzKfQd858Dw4b4xcDjkEUn3-PQ4H4",
+      "credentials": [
+        {
+          "publicKey": "pAEDAzkBACBZAQCwJI5jCDjfi0MzXWIuCfOtn5vMaHq7WzVGWSqS_TuX4B0N76MoxxuHbW6-cDcZ7C9qA6xXDvp_d688gBMZMlxo_q4TQUm9CYoirNXykBCZN7wmZ-SJ3pAzMyKIDfjKBmHk8TUx0RyZRHfGF2yJIIHoRYHzPitOL3H80ejpnhKTNmwwzrbmBxzTbAI4Gj4TsekR1wYZtXR4L23nbrHoiw5flN-ZTgvzQuAF-wQpUKYx2wg-AcvYj2YDlFmkctZi19Uj1MmmgKBo1eZBqlYYQ0qA6HGSPmv1vrAlAEgSBRuJS0z-51UjlJy9XOQ_cvDrskviE4DyhQDL7FiBz6SA2oPNIUMBAAE",
+          "transports": [
+            "internal"
+          ],
+          "credId": "l047vjk5Q1Wsirmjne_9gLCxYEWZGULoUpVfYO1V-JE",
+          "prevCounter": 0
+        }
+      ]
+    },
+    {
+      "username": "eltonn",
+      "id": "3NzggRF7h-CYeOGsAGj_mDPPCHtzJnRe9p5pRJy9sjU",
+      "credentials": [
+        {
+          "publicKey": "pQECAyYgASFYICDJnqdi8xuzI2_FiGkcFqGIbrkqA20VQRkwr7X1rLJZIlggRzgvDQGYnSr8YwgbEFyX_8BMlzy54uAfphROW5JJg-A",
+          "transports": [
+            "usb",
+            "ble",
+            "nfc"
+          ],
+          "credId": "poxJy8uj42OJVOWEI7e3x-lbCHIiw_Fk5REf5hyk4kFiKWuZI00sNzAOVUbgqJGDEbHb7V_Xa5A-nSn5FWU_pA",
+          "prevCounter": 8
+        }
+      ]
+    },
+    {
+      "username": "golo",
+      "id": "LKUrqjhfdC5tioQatrQRQYCzX5myZ4aaP9HXVBleP9E",
+      "credentials": [
+        {
+          "publicKey": "pQECAyYgASFYIFV_5y-BKiPb-kYf5bP0axqVH_1zC5jXtn6wiIKE7B4iIlgg7Je9KpqAdTGNQGrWdZ6tQ8KY3T64JCex0f05eLRoobo",
+          "transports": [
+            "usb",
+            "ble",
+            "nfc"
+          ],
+          "credId": "wg7ZdDwRWjgHr_H0uWxtecF8bXQA2LYceiF0Uv4N7yItqkpH89OFeq7sJSi4cyHGB2t09521wUgGmGez7zr8Ww",
+          "prevCounter": 3
+        }
+      ]
+    },
+    {
+      "username": "goloo",
+      "id": "cLBorhfZiuVcOebgDUkLWJoRqtEzxVqBnPA8xokmKJQ",
+      "credentials": [
+        {
+          "publicKey": "pQECAyYgASFYIKLanDoa9lPK01DEmDqqh5NBSbrbIEv5HcQeO0a_SLCqIlgg7PioaFI24kPba1P4kSNxtqwAi53b9zX8VQ28a2gHGIk",
+          "transports": [
+            "usb",
+            "ble",
+            "nfc"
+          ],
+          "credId": "QQl0aFzKtcmZSuG-MmqNBUpAA3o6JJbagmbCqFNEjIb6C3uKtzlqklNKhXHSAbzeaQdK-ROhw2dMCciF7AL63w",
+          "prevCounter": 6
+        }
+      ]
+    },
+    {
+      "username": "nicerr",
+      "id": "ufI2wHWlwFeDGvAMnfubrGrab7o2sIhllDKs3jybQU8",
+      "credentials": [
+        {
+          "publicKey": "pQECAyYgASFYIJdubP--DMsis7ZZzZPUnorSQJDOta9vj4nPLd73D8GEIlgge9gyQzZTO032oljKkXORysyUaegmpgI6K3hdVoMDpYU",
+          "transports": [
+            "internal"
+          ],
+          "credId": "AUQ-e1h6SvoLJVXyRtN57qvfsVU85X9XmCqgJ13DHjRgPCtpqsnoZxvgoMGQWy1iyZXK8ph0WjxlmXH2mn6QaBs",
+          "prevCounter": 1
+        }
+      ]
+    }
+  ]
+}

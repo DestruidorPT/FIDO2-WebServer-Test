@@ -1,0 +1,50 @@
+{
+  "name": "fido2-auth-elton-pastilha",
+  "version": "0.0.3",
+  "description": "Autenticação FIDO2",
+  "main": "server.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "lowdb": "^1.0.0",
+    "@material/mwc-button": "^0.20.0",
+    "@material/mwc-fab": "^0.20.0",
+    "@material/mwc-top-app-bar-fixed": "^0.20.0",
+    "@material/mwc-textfield": "^0.20.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "@babel/core": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "@simplewebauthn/server": "^0.10.6",
+    "base64url": "^3.0.1",
+    "css-loader": "^5.0.1",
+    "sass-loader": "^10.1.0",
+    "sass": "^1.32.4",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "express-session": "^1.17.1",
+    "cbor": "^6.0.1",
+    "cbor-sync": "^1.0.4",
+    "@material/linear-progress": "^9.0.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "repository": {
+    "url": "https://github.com/DestruidorPT/FIDO2-Android-Test"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "node",
+    "express",
+    "webauthn",
+    "fido2"
+  ]
+}
